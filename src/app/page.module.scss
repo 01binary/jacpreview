@@ -4,6 +4,29 @@
   margin-bottom: 4px;
 }
 
+.fraction {
+  display: flex;
+  flex-direction: column;
+}
+
 .all {
   margin: 1rem;
+}
+
+.jacobian {
+  position: relative;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.jacobianOpen {
+  position: absolute;
+  top: 0;
+  left: -1rem;
+}
+
+.jacobianClose {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
