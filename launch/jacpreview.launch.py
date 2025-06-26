@@ -16,7 +16,7 @@ def generate_launch_description():
     
     address_arg = DeclareLaunchArgument(
         'address',
-        default_value='0.0.0.0',
+        default_value='127.0.0.1',
         description='Address for ros2bridge websocket server'
     )
 
