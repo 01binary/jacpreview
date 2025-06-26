@@ -32,8 +32,7 @@ export default function Home() {
             <div className={styles.cellLabel}>∂<sub>z</sub></div>
             <div className={styles.cellValue}>{snapshot?.rot[2].toFixed(2)}</div>
           </td>
-        </tr>
-        <tr>
+
           <td>
             <div className={styles.cellLabel}>∂θ<sub>x</sub></div>
             <div className={styles.cellValue}>{snapshot?.rot[0].toFixed(2)}</div>
