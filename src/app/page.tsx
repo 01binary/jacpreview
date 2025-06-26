@@ -61,16 +61,24 @@ export default function Home() {
         </tr>
       </table>
       <h2>Jacobian</h2>
-      <table>
-        <tr>
-          <td>
-            <div className={[styles.cellLabel, styles.callLabelPre].join(' ')}>
-              ∂p<sub>x</sub>
-            </div>
-            <div className={styles.cellValue}>{0}</div>
-          </td>
-        </tr>
-      </table>
+      <div className={styles.jacobian}>
+        <svg width="32" className={styles.jacobianOpen} viewBox="0 0 58 792">
+          <polygon fill="white" points="6 23.05 15.6 23.05 15.6 25.03 6 25.03 6 766.97 15.6 766.97 15.6 768.95 6 768.95 1.48 768.95 1.48 23.05 6 23.05"/>
+        </svg>
+        <table>
+          <tr>
+            <td>
+              <div className={[styles.cellLabel, styles.callLabelPre].join(' ')}>
+                ∂p<sub>x</sub>
+              </div>
+              <div className={styles.cellValue}>{0}</div>
+            </td>
+          </tr>
+        </table>
+        <svg width="32" className={styles.jacobianClose} viewBox="0 0 58 792">
+          <polygon fill="white" points="53.48 23.05 43.88 23.05 43.88 25.03 53.48 25.03 53.48 766.97 43.88 766.97 43.88 768.95 53.48 768.95 58 768.95 58 23.05 53.48 23.05"/>
+        </svg>
+      </div>
     </main>
   );
 }
