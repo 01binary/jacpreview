@@ -16,7 +16,7 @@ export default function Home() {
   useRosListener(handleKinematics);
 
   return (
-    <main>
+    <main className={styles.all}>
       <h2>End Effector</h2>
       <table>
         <tr>
