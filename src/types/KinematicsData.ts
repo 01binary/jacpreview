@@ -7,4 +7,6 @@ export interface KinematicsData {
   r6: number[];
   vel: number[];
   rot: number[];
+  q_in: number[];
+  qdot_out: number[];
 } 
