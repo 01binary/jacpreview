@@ -21,29 +21,29 @@ export default function Home() {
       <table>
         <tr>
           <td>
-            <div className={styles.cellLabel}>δ<sub>x</sub></div>
+            <div className={styles.cellLabel}>∂<sub>x</sub></div>
             <div className={styles.cellValue}>{snapshot?.rot[0].toFixed(2)}</div>
           </td>
           <td>
-            <div className={styles.cellLabel}>δ<sub>y</sub></div>
+            <div className={styles.cellLabel}>∂<sub>y</sub></div>
             <div className={styles.cellValue}>{snapshot?.rot[1].toFixed(2)}</div>
           </td>
           <td>
-            <div className={styles.cellLabel}>δ<sub>z</sub></div>
+            <div className={styles.cellLabel}>∂<sub>z</sub></div>
             <div className={styles.cellValue}>{snapshot?.rot[2].toFixed(2)}</div>
           </td>
         </tr>
         <tr>
           <td>
-            <div className={styles.cellLabel}>θx</div>
+            <div className={styles.cellLabel}>∂θ<sub>x</sub></div>
             <div className={styles.cellValue}>{snapshot?.rot[0].toFixed(2)}</div>
           </td>
           <td>
-            <div className={styles.cellLabel}>θy</div>
+            <div className={styles.cellLabel}>∂θ<sub>y</sub></div>
             <div className={styles.cellValue}>{snapshot?.rot[1].toFixed(2)}</div>
           </td>
           <td>
-            <div className={styles.cellLabel}>θz</div>
+            <div className={styles.cellLabel}>∂θ<sub>z</sub></div>
             <div className={styles.cellValue}>{snapshot?.rot[2].toFixed(2)}</div>
           </td>
         </tr>
@@ -66,7 +66,7 @@ export default function Home() {
         <tr>
           <td>
             <div className={[styles.cellLabel, styles.callLabelPre].join(' ')}>
-              δp<sub>x</sub>
+              ∂p<sub>x</sub>
             </div>
             <div className={styles.cellValue}>{0}</div>
           </td>
