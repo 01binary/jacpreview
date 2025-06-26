@@ -6,6 +6,19 @@ import { useCallback, useState } from "react";
 import styles from "./page.module.scss";
 import { initialData } from "./initialData";
 
+const MAX_COLOR = { r: 240, g: 96, b: 54 };
+const MIN_COLOR = { r: 249, g: 183, b: 51 };
+
+const getColorForValue = (value: number) => {
+  if (value > 1) {
+    console.log('greater than one!', value)
+  }
+  const r = Math.round(MIN_COLOR.r + (MAX_COLOR.r - MIN_COLOR.r) * value);
+  const g = Math.round(MIN_COLOR.g + (MAX_COLOR.g - MIN_COLOR.g) * value);
+  const b = Math.round(MIN_COLOR.b + (MAX_COLOR.b - MIN_COLOR.b) * value);
+  return `rgb(${r}, ${g}, ${b})`;
+};
+
 export default function Home() {
   const [snapshot, setSnapshot] = useState<KinematicsData>(initialData);
 
@@ -17,37 +30,36 @@ export default function Home() {
 
   return (
     <main className={styles.all}>
-      <h2>End Effector</h2>
       <table>
         <tr>
           <td>
-            <div className={styles.cellLabel}>∂<sub>x</sub></div>
-            <div className={styles.cellValue}>{snapshot?.rot[0].toFixed(2)}</div>
+            <div className={styles.cellLabel}><span className={styles.unimportant}>∂</span>p<sub>x</sub></div>
+            <div className={styles.cellValue}>{Math.abs(snapshot?.vel[0]).toFixed(2)}</div>
           </td>
           <td>
-            <div className={styles.cellLabel}>∂<sub>y</sub></div>
-            <div className={styles.cellValue}>{snapshot?.rot[1].toFixed(2)}</div>
+            <div className={styles.cellLabel}><span className={styles.unimportant}>∂</span>p<sub>y</sub></div>
+            <div className={styles.cellValue}>{Math.abs(snapshot?.vel[1]).toFixed(2)}</div>
           </td>
           <td>
-            <div className={styles.cellLabel}>∂<sub>z</sub></div>
-            <div className={styles.cellValue}>{snapshot?.rot[2].toFixed(2)}</div>
+            <div className={styles.cellLabel}><span className={styles.unimportant}>∂</span>p<sub>z</sub></div>
+            <div className={styles.cellValue}>{Math.abs(snapshot?.vel[2]).toFixed(2)}</div>
           </td>
 
           <td>
-            <div className={styles.cellLabel}>∂θ<sub>x</sub></div>
-            <div className={styles.cellValue}>{snapshot?.rot[0].toFixed(2)}</div>
+            <div className={styles.cellLabel}><span className={styles.unimportant}>∂</span>r<sub>x</sub></div>
+            <div className={styles.cellValue}>{Math.abs(snapshot?.rot[0]).toFixed(2)}</div>
           </td>
           <td>
-            <div className={styles.cellLabel}>∂θ<sub>y</sub></div>
-            <div className={styles.cellValue}>{snapshot?.rot[1].toFixed(2)}</div>
+            <div className={styles.cellLabel}><span className={styles.unimportant}>∂</span>r<sub>y</sub></div>
+            <div className={styles.cellValue}>{Math.abs(snapshot?.rot[1]).toFixed(2)}</div>
           </td>
           <td>
-            <div className={styles.cellLabel}>∂θ<sub>z</sub></div>
-            <div className={styles.cellValue}>{snapshot?.rot[2].toFixed(2)}</div>
+            <div className={styles.cellLabel}><span className={styles.unimportant}>∂</span>r<sub>z</sub></div>
+            <div className={styles.cellValue}>{Math.abs(snapshot?.rot[2]).toFixed(2)}</div>
           </td>
         </tr>
       </table>
-      <h2>Joints</h2>
+  
       <table>
         <tr>
           {snapshot?.q_in.map((val, idx) => (
@@ -55,29 +67,35 @@ export default function Home() {
               <div className={styles.cellLabel}>
                 θ<sub>{idx + 1}</sub>
               </div>
-              <div className={styles.cellValue}>{val.toFixed(2)}</div>
+              <div className={styles.cellValue}>
+                {(val >= 0 ? ' ' : '') + val.toFixed(2)}
+              </div>
             </td>
           ))}
         </tr>
       </table>
-      <h2>Jacobian</h2>
+
       <div className={styles.jacobian}>
-        <svg width="32" className={styles.jacobianOpen} viewBox="0 0 58 792">
-          <polygon fill="white" points="6 23.05 15.6 23.05 15.6 25.03 6 25.03 6 766.97 15.6 766.97 15.6 768.95 6 768.95 1.48 768.95 1.48 23.05 6 23.05"/>
-        </svg>
         <table>
-          <tr>
-            <td>
-              <div className={[styles.cellLabel, styles.callLabelPre].join(' ')}>
-                ∂p<sub>x</sub>
-              </div>
-              <div className={styles.cellValue}>{0}</div>
-            </td>
-          </tr>
+          {['px', 'py', 'pz', 'rx', 'ry', 'rz'].map((endEffectorProperty, endEffectorPropertyIndex) => (
+            <tr>
+              {[1, 2, 3, 4, 5, 6, 7].map((jointIndex) => (
+                <td style={{
+                  color: getColorForValue(snapshot[`r${endEffectorPropertyIndex + 1}`][jointIndex - 1])
+                }}>
+                  <div className={styles.fraction}>
+                    <div className={styles.numerator}>
+                      <span className={styles.unimportant}>∂</span>{endEffectorProperty[0]}<sub>{endEffectorProperty[1]}</sub>
+                    </div>
+                    <div className={styles.denominator}>
+                      <span className={styles.unimportant}>∂</span>θ<sub>{jointIndex}</sub>
+                    </div>
+                  </div>
+                </td>
+              ))}
+            </tr>
+          ))}
         </table>
-        <svg width="32" className={styles.jacobianClose} viewBox="0 0 58 792">
-          <polygon fill="white" points="53.48 23.05 43.88 23.05 43.88 25.03 53.48 25.03 53.48 766.97 43.88 766.97 43.88 768.95 53.48 768.95 58 768.95 58 23.05 53.48 23.05"/>
-        </svg>
       </div>
     </main>
   );

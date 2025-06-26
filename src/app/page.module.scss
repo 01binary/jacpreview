@@ -4,29 +4,49 @@
   margin-bottom: 4px;
 }
 
+.cellValue {
+  text-align: center;
+  font-family: 'Roboto Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
 .fraction {
   display: flex;
   flex-direction: column;
+  width: 1.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.unimportant {
+  opacity: 0.5;
+}
+
+.numerator {
+  padding-bottom: 2px;
+  border-bottom-width: 1px;
 }
 
 .all {
-  margin: 1rem;
+  margin: 0 1rem;
+  
+  table {
+    table-layout: fixed;
+    width: auto;
+    
+    td {
+      width: 4rem;
+      text-align: center;
+      padding: 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      font-family: 'Roboto Mono', monospace;
+      font-variant-numeric: tabular-nums;
+    }
+  }
 }
 
 .jacobian {
   position: relative;
   margin-left: 1rem;
   margin-right: 1rem;
-}
-
-.jacobianOpen {
-  position: absolute;
-  top: 0;
-  left: -1rem;
-}
-
-.jacobianClose {
-  position: absolute;
-  top: 0;
-  right: 0;
 }

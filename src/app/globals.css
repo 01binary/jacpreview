@@ -26,17 +26,11 @@ body {
   font-family: 'Roboto Mono', monospace;
 }
 
-td {
-  width: 4rem;
-}
-
 h2 {
   font-weight: bold;
 }
 
 table {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
   margin-left: 0.5rem;
 }
 
